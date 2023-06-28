@@ -1,0 +1,508 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Tools for documenting in Industrial Automation</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="code_example.html"><strong aria-hidden="true">1.1.</strong> Example diagram code</a></li><li class="chapter-item expanded "><a href="advantages.html"><strong aria-hidden="true">1.2.</strong> Advantages</a></li><li class="chapter-item expanded "><a href="this_guide.html"><strong aria-hidden="true">1.3.</strong> This guide...</a></li></ol></li><li class="chapter-item expanded "><a href="Tools.html"><strong aria-hidden="true">2.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/Git.html"><strong aria-hidden="true">2.1.</strong> Git</a></li><li class="chapter-item expanded "><a href="tools/Docker.html"><strong aria-hidden="true">2.2.</strong> Docker</a></li><li class="chapter-item expanded "><a href="tools/PlantUMLserver.html"><strong aria-hidden="true">2.3.</strong> PlantUML server</a></li><li class="chapter-item expanded "><a href="tools/VSCode.html"><strong aria-hidden="true">2.4.</strong> Visual Studio Code</a></li><li class="chapter-item expanded "><a href="tools/mdBook.html"><strong aria-hidden="true">2.5.</strong> mdBook</a></li></ol></li><li class="chapter-item expanded "><a href="Usage.html"><strong aria-hidden="true">3.</strong> Usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="usage/Git.html"><strong aria-hidden="true">3.1.</strong> Git clone</a></li><li class="chapter-item expanded "><a href="usage/PlantUML.html"><strong aria-hidden="true">3.2.</strong> PlantUML render example</a></li><li class="chapter-item expanded "><a href="usage/mdBook.html"><strong aria-hidden="true">3.3.</strong> mdBook</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Tools for documenting in Industrial Automation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>For technical projects where for example communication between different systems, or automated functions have to be defined, pictures say more than a thousand words. What you design will be used by your colleagues, reviewed by your teachers, or used by your future self. So properly communicating your ideas is important.</p>
+<p>To give you an idea on what you can do in approximately 30 lines of text:</p>
+<p><img src="mdbook-plantuml-img/1df1dc68c12de1d1c13e963e168a3b967b1482e9.svg" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="example-diagram-code"><a class="header" href="#example-diagram-code">Example diagram code</a></h1>
+<pre><code>@startuml pickup_parcel_from_coveyor
+skinparam backgroundColor transparent
+left to right direction
+
+component box_pickup_application {
+    
+    [frame]
+    () placement -u- frame
+    [robot]
+    () input_0 -- robot
+    () output_0 -- robot
+    () &quot;end\neffector&quot; -- robot
+
+    [sensor]
+    sensor --&gt; input_0 : connected
+    sensor --&gt; &quot;sensor\nposition&quot;
+    
+    robot -&gt; placement
+
+    [cabinet]
+    () &quot;robot\npower&quot; -- cabinet
+    () &quot;conveyor\npower&quot; -- cabinet
+   
+    cabinet -u-&gt; placement
+    robot --&gt; &quot;robot\npower&quot;
+    cabinet -r-&gt; output_0
+    
+    [conveyor]
+    () &quot;sensor\nposition&quot; -- conveyor
+    () &quot;box\nposition&quot; -- conveyor
+    conveyor -&gt; placement
+    conveyor --&gt; &quot;conveyor\npower&quot;
+
+    [box]
+    () shape -- box
+    
+    [gripper]
+    gripper -l-&gt; shape
+    
+    box --&gt; &quot;box\nposition&quot;
+    gripper --&gt; &quot;end\neffector&quot;
+}
+
+[building]
+
+() energy -l- building
+() location -d- building
+
+frame --&gt; location
+cabinet -r-&gt; energy
+
+@enduml
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advantages"><a class="header" href="#advantages">Advantages</a></h1>
+<p>How would you explain in approximately 30 lines of written text to your boss or colleague how your setup will work?
+The diagram was made in approximately 15 minutes from scratch and gave immediate insight in what was missing. A further 10 minutes brought it to where it is now.</p>
+<p>Don't be afraid to use this because your manager will not understand the source of the diagram. That's why you've made the diagram :) ... So it's easy to understand.</p>
+<p>Creating diagrams this way has advantages:</p>
+<ul>
+<li>
+<p>When making these images you'll use a syntax, you'll be gently forced to write correct diagrams.</p>
+</li>
+<li>
+<p>These diagrams are made for a specific way of communicating. Just what is needed.</p>
+</li>
+<li>
+<p>Working from the keyboard, describing functionality instead of burning litres of mouse-fuel in fancy GUI's will let you focus on describing your system, and not be distracted by nice colors, arrow shapes and whatnot. </p>
+<p>During a project specs or implementations tend to change when deeper insight comes. So focussing on content instead of prettieness saves lots of time. You'll be changing your diagrams frequently.</p>
+</li>
+<li>
+<p>Using plain text makes for easy version control.</p>
+</li>
+<li>
+<p>Using a version control system enables working simultaneous on a project.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="this-guide"><a class="header" href="#this-guide">This guide...</a></h1>
+<p>... will show you how to set up a minimal system with which you can maintain your documentation about a project.</p>
+<p>During this guide you will have to create your own local setup. When done successfully additional instructions for other tools, tips and tricks etcetera will appear.</p>
+<p>For example:</p>
+<ul>
+<li>How to work together on a project by using Git.</li>
+<li>Learn about branching and merging branches.</li>
+<li>Excersize creating pull requests to your team's repository.</li>
+<li>Creating Sequence diagrams, State machines.</li>
+<li>Tips and tricks when working with Visual Studio Code.</li>
+</ul>
+<p><img src="mdbook-plantuml-img/665b9ff3440a26dbde586347d15dcfc83cc9a35c.svg" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tools"><a class="header" href="#tools">Tools</a></h1>
+<p>To get started, you'll need to install Visual Studio Code, GIT, Docker and mdBook. We'll use Windows executables. You're free to use development setups and whatnot, but you're on your own when things do not work.</p>
+<ul>
+<li><a href="./tools/Git.html">Git</a></li>
+<li><a href="./tools/Docker.html">Docker</a></li>
+<li><a href="./tools/PlantUMLserver.html">PlantUML server</a></li>
+<li><a href="./tools/VSCode.html">Visual Studio Code</a></li>
+<li><a href="./tools/mdBook.html">mdBook</a></li>
+</ul>
+<h2 id="sharex"><a class="header" href="#sharex">ShareX</a></h2>
+<p>A general usefull tool for taking snapshots and whatnot is <a href="https://getsharex.com/downloads">ShareX</a></p>
+<h2 id="drawio"><a class="header" href="#drawio">Draw.io</a></h2>
+<p>Another usefull program is <a href="https://www.drawio.com/">Draw.io</a>
+It allows you to visually draw flowcharts. If you prefer a desktop application, the search the Windows store or <a href="https://github.com/jgraph/drawio-desktop/releases">download from Github</a></p>
+<h2 id="inkscape"><a class="header" href="#inkscape">Inkscape</a></h2>
+<p>For quickly (with a small learning curve) drawing overviews and depicting principles (and more) you can use <a href="https://inkscape.org/release/">Inkscape</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="git"><a class="header" href="#git">Git</a></h1>
+<p>Git is used to maintain source code. When working with -for example- robot programs in plain text this is an ideal method of keeping track of changes. Next to that, using Git enables working together on the same project/files/documentation.</p>
+<p><strong><em>NOTE:</em></strong>  Git is not suitable for binary files.</p>
+<p>Read up on installation and configuration:</p>
+<ul>
+<li><a href="https://git-scm.com/download/win">Installing GIT</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Basic GIT configuration</a></li>
+</ul>
+<p>After installing Git for windows, open Powershell or another console and setup your credentials.</p>
+<pre><code>git config --global user.name &quot;John Doe&quot;
+git config --global user.email johndoe@example.com
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="docker"><a class="header" href="#docker">Docker</a></h1>
+<p>Docker is software to run software in a container. Because it's in contained and easy to download an image, it's very easy to use software that's hard to set up or has been written (for Linux). If the software is run by a server, it's easy to use locally without having to know about setting up a server in language whatnot.</p>
+<ul>
+<li>Download <a href="https://www.docker.com/products/docker-desktop/">Docker desktop</a></li>
+<li>Use <code>WSL2</code> option during install.
+<img src="tools/02%20docker%20options.png" alt="WSL2_Option" />
+<img src="tools/03%20docker%20restart.png" alt="Restart" /></li>
+<li>Follow instructions when the Computer and Docker have restarted. 
+<img src="tools/04%20docker%20installation%20wsl2.png" alt="Install_WSL2" /></li>
+<li>Open Windows Poweshell and use wsl 2 as standard
+<pre><code>wsl --set-default-version 2
+</code></pre>
+<img src="tools/06%20powershell%20set%20wsl%20version%20succeeded.png" alt="Use_WSL2_option" /></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="plantuml-server"><a class="header" href="#plantuml-server">PlantUML server</a></h1>
+<p>Follow these instructions to install the PlantUML docker container. Using a container allows ease of running a local server. This way you do not need to have access to the Internet in case you are working in a factory where access to the Internet is limited or unavailable.</p>
+<ul>
+<li>Pull (Download) the PlantUML server container by starting it with:
+<pre><code>docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+</code></pre>
+<img src="tools/plantuml_container.gif" alt="Plantuml_container_pull" /></li>
+<li>Allow Windows firewall to use port 8080
+<img src="tools/10%20allow%20firewall%20to%20expose%20port%208080.png" alt="Windows_firewall_port_8080" /></li>
+<li>In Docker Desktop you can now see the container running. As per the startup arguments it has connected port 8080 of the container to port 8080 of our computer.
+<img src="tools/11%20see%20container%20running.png" alt="Running_PlantUML_server" /></li>
+<li>Browse to the adress <a href="http://localhost:8080">http://localhost:8080</a> to use PlantUML server. </li>
+</ul>
+<p>If you have trouble accessing the container due to possibly other servers using the localhost 8080 port, please connect the container port <code>8080</code> to another local port like <code>8181</code> like so:</p>
+<ul>
+<li>
+<p>When starting from the command line use the following startup command:</p>
+<pre><code>docker run -d -p 8181:8080 plantuml/plantuml-server:jetty
+</code></pre>
+</li>
+<li>
+<p>Or start the container from Docker desktop by choosing <code>Images -&gt; plantuml/plantuml-server</code>, press the <code>run</code> button in the top right corner and change the port like so:</p>
+<p><img src="tools/13%20docker%20change%20port.png" alt="Change_port" /></p>
+</li>
+<li>
+<p>Browse to the adress <a href="http://localhost:8181">http://localhost:8181</a> to use PlantUML server.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="visual-studio-code"><a class="header" href="#visual-studio-code">Visual Studio Code</a></h1>
+<p>For writing the documentation we'll use Microsoft's Visual Studio Code. This is an IDE with various plug-ins that will help with the writing process.
+Because we're not hindered by word processor software like Microsoft Word we can focus on the content and because we write in plain text, we can use Git for revisions, merging work by multiple authors, and have it displayed (rendered) in various tools.</p>
+<ul>
+<li>
+<p>Download and install <a href="https://code.visualstudio.com/">Microsoft Visual Studio Code</a>.</p>
+</li>
+<li>
+<p>Open Microsoft Visual Studio Code (from now on abbreviated as <code>VS Code</code>).</p>
+</li>
+<li>
+<p>Open the <code>Extensions</code> tab on the left and search for packages that will help with the workflow.</p>
+<p><img src="tools/code_extensions.png" alt="Extensions" title="Visual Code Extensions" /></p>
+</li>
+<li>
+<p>Install <code>PlantUML</code></p>
+<p><img src="tools/code_plantuml.png" alt="PlantUML" title="PlantUML" /></p>
+</li>
+<li>
+<p>Install <code>GitLens</code></p>
+<p><img src="tools/code_gitlens.png" alt="GitLens" title="GitLens" /></p>
+</li>
+<li>
+<p>Install <code>Markdown All in One</code></p>
+<p><img src="tools/code_markdownallinone.png" alt="MarkdownAllinOne" title="Markdown All in One" /></p>
+</li>
+</ul>
+<h1 id="setup-of-plantuml-extension"><a class="header" href="#setup-of-plantuml-extension">Setup of PlantUML extension</a></h1>
+<p>Instead of using the demo webserver of the PlantUML organisation, the PlantUML extension can use a local server. This can only be done if you have correctly <a href="tools/Docker.html">installed Docker</a> and also <a href="tools/PlantUMLserver.html">installed the PlantUML server container</a> (O r if you're a PRO installed the PlantUML server in your own way.)</p>
+<ul>
+<li>
+<p>in <code>VS Code</code> open the settingd by <code>CRTL</code> + <code>,</code></p>
+</li>
+<li>
+<p>search for <code>plantuml</code> in the search box</p>
+<p><img src="tools/code_plantuml_settings.png" alt="VSCodePlantUmlSetting" title="PlantUML settings" /></p>
+</li>
+<li>
+<p>Choose <code>PlantUMLServer</code> for renderer.</p>
+</li>
+<li>
+<p>Change the URL of the server to the correct adress of the PlantUML server docker container.</p>
+</li>
+</ul>
+<p>Try <a href="tools/../usage/PlantUML.html#create-a-plantuml-diagram">making a very simple diagram </a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook"><a class="header" href="#mdbook">mdBook</a></h1>
+<p><a href="https://rust-lang.github.io/mdBook/">mdBook</a> lets you serves your documentation in a readable way, without you having to know a lot about setting up servers. Similar <a href="tools/Docker.html">like the previous chapter</a> about Docker containers.
+The difference is that mdBook specializes in creating webpages from your information in Markdown format.
+As an example, see the <a href="https://doc.rust-lang.org/book/">Rust Programming Language Documentation</a></p>
+<p>These instructions do not cover running mdBook on Linux or with a Docker image. You can try, but you're on your own.</p>
+<ul>
+<li>Go to <a href="https://github.com/rust-lang/mdBook/releases">the mdBook Github releases page</a></li>
+<li>Download your release and unzip it.</li>
+<li>Copy the content of the unzipped folder (which is a folder), called something like <code>mdbook-v0.4.30-x86_64-pc-windows-msvc</code> to <code>C:\Program Files</code></li>
+<li>In the windows search bar, search for <code>Path</code> and open the <code>Edit the system environment variables</code>.
+This can also be found in other ways by searching the control panel, or by RMC on <code>This PC</code> in <code>Windows Explorer</code> and selecting <code>Properties</code>
+Then you select <code>Advanced system settings</code> in the right of the new window.
+<img src="tools/./properties.png" alt="properties" /></li>
+<li>Click <code>Environment variables</code> button
+<img src="tools/./system_properties_advanced.png" alt="advances_system_properties" /></li>
+<li>Select the <code>Path</code> environment variable.
+<img src="tools/./environment_variables.png" alt="environment_variables" /></li>
+<li>Click <code>New</code> and paste the location of the folder containing the <code>mdBook</code> program that you've just moved to <code>C:\Program Files</code>. In my case it's <code>C:\Program Files\mdbook-v0.4.30-x86_64-pc-windows-msvc</code>
+<img src="tools/./path.png" alt="path" /></li>
+<li>Click <code>OK</code> and close the control panel windows.</li>
+</ul>
+<h1 id="mdbook-diagram-plugin"><a class="header" href="#mdbook-diagram-plugin">mdBook diagram plugin</a></h1>
+<p>For creating PlantUML diagrams a plugin for mdBook is needed.</p>
+<ul>
+<li>Download the <code>mdbook-plantuml.exe</code> from <a href="https://github.com/sytsereitsma/mdbook-plantuml/releases">https://github.com/sytsereitsma/mdbook-plantuml/releases</a>.</li>
+<li>copy this file to the location of the mdbook executable. The directory location you have just added to the <code>PATH</code> in the instructions above.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="usage"><a class="header" href="#usage">Usage</a></h1>
+<p>This chapter will give you instructions on how to use the described tools. You are reading a static generated site. This is OK for now to get you started. For the next part we will start using Git to download the repository that will generate a dynamic site.</p>
+<ul>
+<li><a href="./usage/Git.html">Git</a></li>
+<li><a href="./usage/PlantUML.html">PlantUML</a></li>
+<li><a href="./usage/mdBook.html">mdBook</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="git-clone"><a class="header" href="#git-clone">Git clone</a></h1>
+<p>By cloning a Git repository (repo) you will create a local (on your computer) Git repository from somewhere else. This repository then contains all the code and commits (history). Depending on how a project is structured -by this I mean the conventions of working together- you want to inform the original repository that you have changes.</p>
+<p>More exact info will follow on a way that this process <em>can</em> work. But for starters you have to do the following to obtain a local copy of the repo:</p>
+<ul>
+<li>
+<p>Create a <a href="https://github.com/signup?">Github account</a></p>
+</li>
+<li>
+<p>Log into your account and go to the user you want to clone a repository from (for this example, use the <a href="https://github.com/beeduhbee/technical_documentation_how_to">this documentation tutorial</a>)</p>
+</li>
+<li>
+<p>In github, clone the repository to your own github account by using the <code>Fork</code> button.</p>
+</li>
+<li>
+<p>Open Powershell or any other console.</p>
+</li>
+<li>
+<p>Create/move to a directory in which you want to have this repository.</p>
+</li>
+<li>
+<p>Clone the repository locally by </p>
+<pre><code>git clone https://github.com/your_user_name/technical_documentation_how_to.git
+</code></pre>
+<p><img src="usage/images/powershell_git_clone.png" alt="" /></p>
+</li>
+<li>
+<p>Move into the newly created directory, and open the directory with <code>VS Code</code> or open the folder from within <code>VS Code</code></p>
+<p><img src="usage/open_repository.png" alt="open_repository_with_vscode" /></p>
+<p>or</p>
+<p><img src="usage/code_open_folder.png" alt="open_repositort_within_vscode" /></p>
+</li>
+<li>
+<p>You'll be able to see the project's content.
+<img src="usage/code_view_project.png" alt="code_view_project" /></p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="plantuml"><a class="header" href="#plantuml">PlantUML</a></h1>
+<h2 id="create-a-plantuml-diagram"><a class="header" href="#create-a-plantuml-diagram">Create a PlantUML diagram</a></h2>
+<ul>
+<li>
+<p>In <code>VS Code</code> create a new file with an extension of one of the following <code>.wsd,.pu,.puml,.plantuml,.iuml</code></p>
+</li>
+<li>
+<p>Add the following syntax to that file:</p>
+<pre><code>@startuml bert_and_ernie
+
+Ernie-&gt;Bert : Hey Bert
+Bert-&gt;Ernie : Hey Ernie
+
+@enduml
+</code></pre>
+</li>
+<li>
+<p>position your cursor between the <code>@...uml</code> tags and press <code>ALT</code>+<code>D</code> or do a RMK (Right Mouse Click) to see what other options you have.</p>
+<p><img src="usage/code_plantuml_render.gif" alt="VSCodePlantUmlPreview" title="PlantUML preview" /></p>
+</li>
+<li>
+<p>a preview window on the right should open, showing a sequence diagram showing Bert and Ernie talking</p>
+<p><img src="usage/../mdbook-plantuml-img/8c42494922dea2f149d7d6535514ed53ace46a25.svg" alt="" /></p>
+</li>
+<li>
+<p>read up on Sequence diagrams, State diagrams, Activity diagrams!</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook-1"><a class="header" href="#mdbook-1">mdBook</a></h1>
+<h2 id="serve"><a class="header" href="#serve">Serve</a></h2>
+<p>Serving this book is done by cloning <a href="https://github.com/beeduhbee/technical_documentation_how_to">this repository</a> first as described in the chapter of <a href="usage/Git.html">Git cloning</a>.</p>
+<p>Installation of <a href="usage/../tools/mdBook.html">mdBook and the mdbook-diagram</a> plugin must also be finished. </p>
+<ul>
+<li>Open a new console in the root directory of the repository.</li>
+<li>start serving by typing <code>mdbook-serve</code>
+<img src="usage/mdbook-serve.gif" alt="" /></li>
+<li>Go to <a href="http://localhost:3000/usage/mdBook.html">your local mdBook server</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
