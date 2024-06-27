@@ -155,7 +155,7 @@
 <li>Creating Sequence diagrams, State machines.</li>
 <li>Tips and tricks when working with Visual Studio Code.</li>
 </ul>
-<p><img src="mdbook-plantuml-img/665b9ff3440a26dbde586347d15dcfc83cc9a35c.svg" alt="" /></p>
+<p><img src="mdbook-plantuml-img/fa325a6a85f28b1db691c11e0363456b91ff7535.svg" alt="" /></p>
 
                     </main>
 
@@ -186,6 +186,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

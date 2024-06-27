@@ -237,7 +237,7 @@ The diagram was made in approximately 15 minutes from scratch and gave immediate
 <li>Creating Sequence diagrams, State machines.</li>
 <li>Tips and tricks when working with Visual Studio Code.</li>
 </ul>
-<p><img src="mdbook-plantuml-img/665b9ff3440a26dbde586347d15dcfc83cc9a35c.svg" alt="" /></p>
+<p><img src="mdbook-plantuml-img/fa325a6a85f28b1db691c11e0363456b91ff7535.svg" alt="" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tools"><a class="header" href="#tools">Tools</a></h1>
 <p>To get started, you'll need to install Visual Studio Code, GIT, Docker and mdBook. We'll use Windows executables. You're free to use development setups and whatnot, but you're on your own when things do not work.</p>
 <ul>
@@ -370,7 +370,7 @@ Then you select <code>Advanced system settings</code> in the right of the new wi
 <img src="tools/./system_properties_advanced.png" alt="advances_system_properties" /></li>
 <li>Select the <code>Path</code> environment variable.
 <img src="tools/./environment_variables.png" alt="environment_variables" /></li>
-<li>Click <code>New</code> and paste the location of the folder containing the <code>mdBook</code> program that you've just moved to <code>C:\Program Files</code>. In my case it's <code>C:\Program Files\mdbook-v0.4.30-x86_64-pc-windows-msvc</code>
+<li>Click <code>Edit</code> and in the newly appeared window <code>New</code> and paste the location of the folder containing the <code>mdBook</code> program that you've just moved to <code>C:\Program Files</code>. In my case it's <code>C:\Program Files\mdbook-v0.4.30-x86_64-pc-windows-msvc</code>
 <img src="tools/./path.png" alt="path" /></li>
 <li>Click <code>OK</code> and close the control panel windows.</li>
 </ul>
@@ -445,7 +445,7 @@ Bert-&gt;Ernie : Hey Ernie
 </li>
 <li>
 <p>a preview window on the right should open, showing a sequence diagram showing Bert and Ernie talking</p>
-<p><img src="usage/../mdbook-plantuml-img/8c42494922dea2f149d7d6535514ed53ace46a25.svg" alt="" /></p>
+<p><img src="usage/../mdbook-plantuml-img/9c23d050760be54ba9555021395a9d162b46ed98.svg" alt="" /></p>
 </li>
 <li>
 <p>read up on Sequence diagrams, State diagrams, Activity diagrams!</p>
@@ -453,7 +453,7 @@ Bert-&gt;Ernie : Hey Ernie
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mdbook-1"><a class="header" href="#mdbook-1">mdBook</a></h1>
 <h2 id="serve"><a class="header" href="#serve">Serve</a></h2>
-<p>Serving this book is done by cloning <a href="https://github.com/beeduhbee/technical_documentation_how_to">this repository</a> first as described in the chapter of <a href="usage/Git.html">Git cloning</a>.</p>
+<p>Serving this book is done by cloning <a href="https://github.com/m-inau/technical_documentation_how_to">this repository</a> first as described in the chapter of <a href="usage/Git.html">Git cloning</a>.</p>
 <p>Installation of <a href="usage/../tools/mdBook.html">mdBook and the mdbook-diagram</a> plugin must also be finished. </p>
 <ul>
 <li>Open a new console in the root directory of the repository.</li>
@@ -479,6 +479,22 @@ Bert-&gt;Ernie : Hey Ernie
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

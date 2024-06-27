@@ -166,7 +166,7 @@ Bert-&gt;Ernie : Hey Ernie
 </li>
 <li>
 <p>a preview window on the right should open, showing a sequence diagram showing Bert and Ernie talking</p>
-<p><img src="../mdbook-plantuml-img/8c42494922dea2f149d7d6535514ed53ace46a25.svg" alt="" /></p>
+<p><img src="../mdbook-plantuml-img/9c23d050760be54ba9555021395a9d162b46ed98.svg" alt="" /></p>
 </li>
 <li>
 <p>read up on Sequence diagrams, State diagrams, Activity diagrams!</p>
@@ -202,6 +202,22 @@ Bert-&gt;Ernie : Hey Ernie
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

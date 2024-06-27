@@ -161,7 +161,7 @@ Then you select <code>Advanced system settings</code> in the right of the new wi
 <img src="./system_properties_advanced.png" alt="advances_system_properties" /></li>
 <li>Select the <code>Path</code> environment variable.
 <img src="./environment_variables.png" alt="environment_variables" /></li>
-<li>Click <code>New</code> and paste the location of the folder containing the <code>mdBook</code> program that you've just moved to <code>C:\Program Files</code>. In my case it's <code>C:\Program Files\mdbook-v0.4.30-x86_64-pc-windows-msvc</code>
+<li>Click <code>Edit</code> and in the newly appeared window <code>New</code> and paste the location of the folder containing the <code>mdBook</code> program that you've just moved to <code>C:\Program Files</code>. In my case it's <code>C:\Program Files\mdbook-v0.4.30-x86_64-pc-windows-msvc</code>
 <img src="./path.png" alt="path" /></li>
 <li>Click <code>OK</code> and close the control panel windows.</li>
 </ul>
@@ -201,6 +201,22 @@ Then you select <code>Advanced system settings</code> in the right of the new wi
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
